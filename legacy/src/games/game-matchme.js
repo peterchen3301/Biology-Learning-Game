@@ -7,8 +7,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ModalWindow from './../common/modal-window';
 import GameSolution from './game-solution';
 
-class Game_MatchMe extends Component{
-  constructor(props){
+import easyData from './EasyMatchMe.json';
+
+class Game_MatchMe extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       data: undefined,
@@ -30,122 +32,165 @@ class Game_MatchMe extends Component{
 
     this.closeModalWindow = this.closeModalWindow.bind(this);
   }
-  componentDidMount(){
+  componentDidMount() {
     let randomIndex;
     let answerKey = {};
     // let url = 'http://localhost:3000/data/MatchMe/'+this.props.level+'.json';
     let origin = window.location.origin;
-    let url = origin+'/data/MatchMe/'+this.props.level+'.json';
-    fetch(url)
-      .then(res => res.json())
-      .then((res) => {
-        this.setState({
-          questionBank: res
-        })
-        if(res.length==0){
-          return false
+    let url = '/data/MatchMe/' + this.props.level + '.json';
+    // fetch(url)
+    //   .then(res => res.json())
+    //   .then((res) => {
+    //     this.setState({
+    //       questionBank: res
+    //     })
+    //     if (res.length == 0) {
+    //       return false
+    //     }
+    //     randomIndex = Math.floor(Math.random() * res.length);
+    //     let blankCount = 0;
+    //     let words = res[randomIndex].definition.split(' ');
+    //     let blanks = res[randomIndex].blanks;
+    //     let options = res[randomIndex].options;
+    //     let wordsHash = words.map((item, index) => {
+    //       let checkItem = item.toLowerCase();
+
+    //       if (blanks.indexOf(checkItem.replace(/[^a-zA-Z ]/g, "")) != -1) {
+    //         return {
+    //           word: item,
+    //           index: index,
+    //           match: blankCount++,
+    //           solved: false
+    //         }
+    //       } else {
+    //         return {
+    //           word: item,
+    //           index: index
+    //         }
+    //       }
+    //     });
+
+    //     answerKey.solutionDescription = res[randomIndex].solutionDescription;
+    //     answerKey.imageSrc = res[randomIndex].imageSrc;
+
+    //     let solutionMap = wordsHash.filter((item) => {
+    //       return item.match != undefined
+    //     });
+
+    //     this.setState({
+    //       data: wordsHash,
+    //       solution: solutionMap,
+    //       options: options,
+    //       answerKey: answerKey
+    //     })
+    //   });
+    this.setState({
+      questionBank: easyData
+    })
+    if (easyData.length == 0) {
+      return false
+    }
+    randomIndex = Math.floor(Math.random() * easyData.length);
+    let blankCount = 0;
+    let words = easyData[randomIndex].definition.split(' ');
+    let blanks = easyData[randomIndex].blanks;
+    let options = easyData[randomIndex].options;
+    let wordsHash = words.map((item, index) => {
+      let checkItem = item.toLowerCase();
+
+      if (blanks.indexOf(checkItem.replace(/[^a-zA-Z ]/g, "")) != -1) {
+        return {
+          word: item,
+          index: index,
+          match: blankCount++,
+          solved: false
         }
-        randomIndex = Math.floor(Math.random() * res.length);
-        let blankCount = 0;
-        let words = res[randomIndex].definition.split(' ');
-        let blanks = res[randomIndex].blanks;
-        let options = res[randomIndex].options;
-        let wordsHash = words.map((item,index) => {
-        let checkItem = item.toLowerCase();
+      } else {
+        return {
+          word: item,
+          index: index
+        }
+      }
+    });
 
-          if(blanks.indexOf(checkItem.replace(/[^a-zA-Z ]/g, "")) != -1){
-            return {
-              word: item,
-              index: index,
-              match: blankCount++,
-              solved: false
-            }
-          }else{
-            return {
-              word: item,
-              index: index
-            }
-          }
-        });
+    answerKey.solutionDescription = easyData[randomIndex].solutionDescription;
+    answerKey.imageSrc = easyData[randomIndex].imageSrc;
 
-        answerKey.solutionDescription = res[randomIndex].solutionDescription;
-        answerKey.imageSrc = res[randomIndex].imageSrc;
+    let solutionMap = wordsHash.filter((item) => {
+      return item.match != undefined
+    });
 
-        let solutionMap = wordsHash.filter((item) => {
-          return item.match != undefined
-        });
-
-        this.setState({
-          data: wordsHash,
-          solution: solutionMap,
-          options: options,
-          answerKey: answerKey
-        })
-      });
+    this.setState({
+      data: wordsHash,
+      solution: solutionMap,
+      options: options,
+      answerKey: answerKey
+    })
   }
 
-  closeModalWindow(){
+  closeModalWindow() {
     this.setState({
       closeModal: true
     })
   }
 
   //To help lock the selection of option before dropping it in the solution blank
-  lockSelection(activeIndex){
+  lockSelection(activeIndex) {
     this.setState({
       activeSelection: this.state.options[activeIndex],
       highlight: true
     })
   }
   //Compare the answers once an input is clicked after locking a selection
-  checkSolution(index,match){
-    if(this.state.solution[match].word.toLowerCase() == this.state.activeSelection.toLowerCase()){
+  checkSolution(index, match) {
+    if (this.state.solution[match].word.toLowerCase() == this.state.activeSelection.toLowerCase()) {
       this.setState(state => {
         const words = state.data;
         words[index].solved = true;
-        return{
+        return {
           words: words
         }
       });
-    }else{
+    } else {
       //Handle the wrong answer section here
     }
   }
   //Remove the selection of the items and the highlight container
-  removeSelection(){
+  removeSelection() {
     this.setState({
       highlight: false
     })
     this.optionsContainerComponent.current.removeOptionSelection()
   }
-  renderBackButton(){
-    return(
-        <Link to="/">
-          <img src="https://image.flaticon.com/icons/svg/54/54097.svg" className="back-button"/>
-        </Link>
+  renderBackButton() {
+    return (
+      <Link to="/">
+        <img src="https://image.flaticon.com/icons/svg/54/54097.svg" className="back-button" />
+      </Link>
     )
   }
-  render(){
+  render() {
+    console.log("rendering match me game");
     this.renderIndex++;
     let solutionFound = false
 
 
-    if(this.state.solution != undefined){
-        let toFindCount = this.state.solution.filter(item => item.solved == false).length
-        if(toFindCount == 0){
-          solutionFound = true
-        }
+    if (this.state.solution != undefined) {
+      let toFindCount = this.state.solution.filter(item => item.solved == false).length
+      if (toFindCount == 0) {
+        solutionFound = true
+      }
     }
 
-    if (this.state.data != undefined){
-      return(
+    if (this.state.data != undefined) {
+      return (
         <React.Fragment>
           <ModalWindow showSolution={solutionFound && this.state.closeModal == false} closeModal={this.closeModalWindow}>
-            <GameSolution image={this.state.answerKey.imageSrc} description={this.state.answerKey.solutionDescription} solution={null}/>
+            <GameSolution image={this.state.answerKey.imageSrc} description={this.state.answerKey.solutionDescription} solution={null} />
           </ModalWindow>
-          <div className="definition-holder" onClick={this.removeSelection} onDrop={(event)=>this.removeSelection}>
-            <MatchMe_DefinitionHolder checkAnswers={this.checkSolution} definition={this.state.data} highlight={this.state.highlight && !solutionFound} blanks={this.state.blanks}/>
-            <MatchMe_Options options={this.state.options} blanks={this.state.blanks} lockSelection={this.lockSelection} ref={this.optionsContainerComponent}/>
+          <div className="definition-holder" onClick={this.removeSelection} onDrop={(event) => this.removeSelection}>
+            <MatchMe_DefinitionHolder checkAnswers={this.checkSolution} definition={this.state.data} highlight={this.state.highlight && !solutionFound} blanks={this.state.blanks} />
+            <MatchMe_Options options={this.state.options} blanks={this.state.blanks} lockSelection={this.lockSelection} ref={this.optionsContainerComponent} />
             {
               this.renderBackButton()
             }
@@ -156,7 +201,7 @@ class Game_MatchMe extends Component{
         </React.Fragment>
       )
     }
-    else{
+    else {
       return <div></div>
     }
   }
