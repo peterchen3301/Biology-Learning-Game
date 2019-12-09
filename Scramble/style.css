@@ -1,0 +1,212 @@
+/*  Element Styling   */
+
+html { font-size:100%; }
+
+body {
+    background: url(imac.png);
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center fixed;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Sue Ellen Francisco' !important;
+}
+
+/* Board Styling */
+#board {
+    width: 500px;
+    height: 60px;
+    border-spacing: 0;
+    margin-left: 430px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+td {
+    background-color: #F5DEB3;
+    border-collapse:collapse;
+    text-align: center;
+    font-family: monospace;
+    font-size: 40px;
+    color: #000;
+    text-transform: uppercase;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #666;
+    font-family: 'Sue Ellen Francisco';
+}
+
+/* Button Styling */
+.button {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#next {
+    font-size: 1.3em;
+    color: #007AFF;
+    background-color: #F0F8FF;
+    padding: 7px 20px;
+    margin-left: 780px;
+    position: absolute;
+    margin-top: 170px;
+    border: none;
+
+}
+
+#levels {
+    font-size: 1.3em;
+    color: #007AFF;
+    background-color: #F0F8FF;
+    padding: 7px 20px;
+    margin-left: 400px;
+    position: absolute;
+    margin-top: 170px;
+    border: none;
+
+}
+
+#hint {
+    font-size: 1.3em;
+    color: #007AFF;
+    background-color: #F0F8FF;
+    padding: 7px 20px;
+    margin-left: 610px;
+    position: absolute;
+    margin-top: 170px;
+    border: none;
+}
+
+#buttonEasy {
+    color: #F0F8FF;
+    background-color: #00BFFF;
+    padding: 7px 20px;
+    margin-left: 0px;
+    margin-top: 0px;
+    /*position: absolute;*/
+    border: none;
+    font-family: 'Sue Ellen Francisco';
+}
+#buttonMedium {
+    color: #F0F8FF;
+    background-color: #00BFFF;
+    padding: 7px 20px;
+    margin-left: 25px;
+    margin-top: 0px;
+    /*position: absolute;*/
+    border: none;
+    font-family: 'Sue Ellen Francisco';
+}
+#buttonHard {
+    color: #F0F8FF;
+    background-color: #00BFFF;
+    padding: 7px 20px;
+    margin-left: 40px;
+    margin-top: 0px;
+    /*position: absolute;*/
+    border: none;
+    font-family: 'Sue Ellen Francisco';
+}
+
+body > div.buttons {
+    margin-top: -157px;
+    margin-left: 40px;
+}
+
+/* Word List & Scoreboard */
+
+#list {
+    margin-left: 72px;
+    margin-top: -10px;
+    font-size: 30px;
+    width: 100px;
+    height: 220px;
+    list-style-type: none;
+}
+
+.wordlist {
+    color: #000;
+
+}
+
+.score {
+    color: #000;
+    font-size: 2.5em;
+
+}
+
+.wordlist {
+    margin-top: -260px;
+    margin-left: 70px;
+    text-decoration: underline;
+    font-size: 2.5em;
+}
+
+#container-fluid > h2.score {
+    float: right;
+    text-decoration: underline;
+    margin-right: 122px;
+    margin-top: -40px;
+}
+
+#score {
+    float: right;
+    margin-right: 137px;
+    margin-top: -230px;
+    font-size: 40px;
+    font-weight: 700;
+
+}
+
+
+/* Tablet Landscape */
+@media screen and (max-width: 1060px) {
+    #primary { width:67%; }
+    #secondary { width:30%; margin-left:3%;}
+}
+
+/* Tablet Portrait */
+@media screen and (max-width: 768px) {
+    #primary { width:100%; }
+    #secondary { width:100%; margin:0; border:none; }
+}
+
+/* Titles */
+
+.title {
+    margin-top: 165px;
+    margin-left: 50px;
+}
+
+
+.word-title {
+    text-align: center;
+    border: 0;
+    padding-bottom: 10px;
+    color: #000;
+    margin-left: 500px;
+    font-size: 4em;
+    display: inline;
+    margin-top: -105px;
+}
+
+.word-title-2 {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 25px;
+    margin-left: -50px;
+}
+
+
+.show-swal2 h2 {
+    color: #000000 !important;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: none;
+    position: relative;
+    margin: 25px 0;
+    padding: 0;
+    line-height: 40px;
+    font-family: 'Sue Ellen Francisco';
+}
