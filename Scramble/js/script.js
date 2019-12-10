@@ -1,3 +1,13 @@
+//var iframe = document.getElementById("mainSandboxGuts");
+//var iframe2=document.getElementByClassname('mainSandboxGuts')[0];
+//console.log(iframe);
+//console.log(iframe2);
+
+//iframe.addEventListener("load",function(){
+  //window.frames[0].document.body.style.height="100% !important";
+//  window.frames[0].document.body.style.height(100);
+
+//})
 
 var levelEasy = {
   ribosomes:"Non-membrane bound structures which make proteins",
